@@ -7,16 +7,11 @@ const textareaFormEl = document.querySelector('textarea');
 
 const storageValues = JSON.parse(localStorage.getItem('feedback-form-state'));
 
-
-if (storageValues === null){
-    inputFormEl.value = "";
-    textareaFormEl.value = "";
-} 
-
-else {
+if (storageValues !== null){
     inputFormEl.value = storageValues.email;
     textareaFormEl.value = storageValues.message;
-}
+} 
+
 
 const onFeedbackFormElSubmit = event => {
   event.preventDefault();
@@ -32,13 +27,14 @@ const onFeedbackFormElSubmit = event => {
     localStorage.clear();
 }};
 // ==========================================
-let userData = {};
+
 const onFeedbackFormElInput = event => {
-    
-    const name = event.target.name;
-    const value = event.target.value;
+
+    const email = feedbackFormEl.elements[0].value;
+    const message = feedbackFormEl.elements[1].value;
   
-    userData[name] = value;
+    const userData = { email, message }
+
     localStorage.setItem("feedback-form-state", JSON.stringify(userData));
 }
 
